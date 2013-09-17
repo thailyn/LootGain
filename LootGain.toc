@@ -2,3 +2,4 @@
 ## Title: Loot Gain
 ## Notes: "Nothing to say just yet."
 ## Version: 0.01
+## DefaultState: disabled
