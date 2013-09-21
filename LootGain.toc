@@ -3,3 +3,6 @@
 ## Notes: Nothing to say just yet.
 ## Version: 0.01
 ## DefaultState: disabled
+
+LootGain.lua
+LootGain.xml
