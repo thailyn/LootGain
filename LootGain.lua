@@ -1,6 +1,4 @@
-function LootGain_OnLoad(self)
-   DEFAULT_CHAT_FRAME:AddMessage("Loot Gain 0.01 loaded.");
-
+local function PrintPlayerInfo()
    DEFAULT_CHAT_FRAME:AddMessage("Player Info:");
    DEFAULT_CHAT_FRAME:AddMessage("  Date: " .. date("%m/%d/%y %H:%M:%S"));
    DEFAULT_CHAT_FRAME:AddMessage("  Time since epoch: " .. time());
@@ -79,3 +77,10 @@ function LootGain_OnLoad(self)
       i = i + 1;
    end
 end
+
+function LootGain_OnLoad(self)
+   DEFAULT_CHAT_FRAME:AddMessage("Loot Gain 0.01 loaded.");
+
+   PrintPlayerInfo();
+end
+
