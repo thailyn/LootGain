@@ -78,9 +78,29 @@ local function PrintPlayerInfo()
    end
 end
 
+local function ChannelTest()
+   local lgChannel = "LootGain3940"
+   local channelType, channelName = JoinChannelByName(lgChannel);
+   DEFAULT_CHAT_FRAME:AddMessage(" Channel Type: " .. (channelType or "nil"));
+   DEFAULT_CHAT_FRAME:AddMessage(" Channel Name: " .. (channelName or "nil"));
+
+   local lgChannelId = GetChannelName(lgChannel);
+   --ChatFrame_AddChannel(DEFAULT_CHAT_FRAME, lgChannel);
+   --ChatFrame_AddChannel(ChatFrame1, lgChannel);
+
+   if (lgChannelId ~= nil) then
+      DEFAULT_CHAT_FRAME:AddMessage(" Attempting to send message to channel " .. lgChannel .. " with id " .. lgChannelId .. ".");
+      SendChatMessage("test", "CHANNEL", nil, lgChannelId);
+   else
+      DEFAULT_CHAT_FRAME:AddMessage(" Chat channel is nil!");
+   end
+end
+
 function LootGain_OnLoad(self)
    DEFAULT_CHAT_FRAME:AddMessage("Loot Gain 0.01 loaded.");
 
    PrintPlayerInfo();
+
+   ChannelTest();
 end
 
