@@ -1,3 +1,22 @@
+local addonChannelName = "LootGain3940";
+local addonChannelId = nil;
+
+local function LootGainPrint(message)
+   if (addonChannelId ~= nil) then
+      SendChatMessage(message, "CHANNEL", nil, addonChannelId);
+   else
+      DEFAULT_CHAT_FRAME:AddMessage(message);
+   end
+end
+
+local function JoinAddonChannel()
+   local channelType, channelName = JoinChannelByName(addonChannelName);
+   addonChannelId = GetChannelName(addonChannelName);
+
+   LootGainPrint("Channel Type: " .. (channelType or "nil"));
+   LootGainPrint("Channel Name: " .. (channelName or "nil"));
+end
+
 local function PrintPlayerInfo()
    DEFAULT_CHAT_FRAME:AddMessage("Player Info:");
    DEFAULT_CHAT_FRAME:AddMessage("  Date: " .. date("%m/%d/%y %H:%M:%S"));
