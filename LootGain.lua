@@ -2,6 +2,9 @@ local addonChannelName = "LootGain3940";
 local addonChannelId = nil;
 
 local function LootGainPrint(message)
+-- See the SendAddonMessage function for non-human-readable messages that have
+-- fewer limitations than SendChatMessage.  Also see
+-- RegisterAddonMessagePrefix.
    if (addonChannelId ~= nil) then
       SendChatMessage(message, "CHANNEL", nil, addonChannelId);
    else
