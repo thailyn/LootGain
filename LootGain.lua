@@ -65,7 +65,7 @@ local function PrintPlayerInfo()
          LootGainPrint("(" .. i .. ") " .. name .. ":")
       else
          LootGainPrint("(" .. i .. ")   " .. name .. " - " .. count .. " / " .. (maximum or "None")
-                                       .. " | " .. (currentWeeklyAmount or "None") .. " / " .. (hasWeeklyLimit or "None")
+                                       .. " / " .. (currentWeeklyAmount or "None") .. " / " .. (hasWeeklyLimit or "None")
                                        .. " - " .. (itemID or "No Item ID") .. " (" .. (icon or "No icon") .. ")");
       end
    end
