@@ -2,7 +2,7 @@ LootGain = { };
 LootGain.version = "0.01";
 LootGain.dataVersion = 1;
 
-local addonChannelName = "LootGain3940";
+local addonChannelName = "LootGain3950";
 local addonChannelId = nil;
 
 local INVENTORY_SLOT_IDS = { };
