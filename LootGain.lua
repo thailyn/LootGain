@@ -240,6 +240,8 @@ end
 function LootGain_OnLoad(self)
    DEFAULT_CHAT_FRAME:AddMessage("Loot Gain 0.01 loaded.");
 
+   GetInventorySlotIds(INVENTORY_SLOTS, INVENTORY_SLOT_IDS);
+
    JoinAddonChannel();
    --PrintPlayerInfo();
 
