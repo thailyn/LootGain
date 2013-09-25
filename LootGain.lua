@@ -286,6 +286,15 @@ local function GetVariablePlayerInfo(player)
    --]]
 end
 
+local function RegisterEvents(self)
+   --this:RegisterEvent("PLAYER_ENTERING_WORLD");
+   --this:RegisterEvent("LOOT_OPENED");
+   --this:RegisterEvent("LOOT_CLOSED");
+   --this:RegisterEvent("LOOT_SLOT_CLEARED");
+   --this:RegisterEvent("CHAT_MSG_SPELL_SELF_BUFF");
+   self:RegisterEvent("UPDATE_MOUSEOVER_UNIT");
+end
+
 function LootGain_OnLoad(self)
    DEFAULT_CHAT_FRAME:AddMessage("Loot Gain 0.01 loaded.");
 
