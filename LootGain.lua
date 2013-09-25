@@ -263,6 +263,18 @@ local function GetVariablePlayerInfo(player)
    for k, v in pairs(player.items) do
       LootGainPrint("Item: " .. v.itemLink .. " - " .. gsub(v.itemLink, "\124", "\124\124") .. " - " .. v.count);
    end
+
+   for k, v in pairs(player.quests) do
+      LootGainPrint("Quest " .. k .. ": " .. v.name .. " - " .. (v.header or "None"));
+   end
+
+   for k, v in pairs(player.currencies) do
+      LootGainPrint("Currency " .. k .. ": " .. v.name .. " - " .. (v.header or "None"));
+   end
+
+   for k, v in pairs(player.professions) do
+      LootGainPrint("Profession: " .. v.name .. " - " .. v.skillLevel .. "(+" .. v.skillModifier .. ")/" .. v.maxSkillLevel);
+   end
 end
 
 function LootGain_OnLoad(self)
