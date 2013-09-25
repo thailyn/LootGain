@@ -175,17 +175,19 @@ local function GetVariablePlayerInfo(player)
          local texture, itemCount, locked, quality, readable = GetContainerItemInfo(currentBagNum, currentSlotNum);
          local isQuestItem, questId, isActive = GetContainerItemQuestInfo(currentBagNum, currentSlotNum);
 
-         player.inventory[itemLink] = player.inventory[itemLink] or { };
-         local curr = player.inventory[itemLink];
+         if itemLink ~= nil then
+            player.inventory[itemLink] = player.inventory[itemLink] or { count = 0 };
+            local curr = player.inventory[itemLink];
 
-         curr.itemLink = itemLink;
-         curr.texture = texture;
-         curr.quality = quality;
-         curr.isQuestItem = isQuestItem;
-         curr.questId = questId;
-         curr.isActive = isActive;
+            curr.itemLink = itemLink;
+            curr.texture = texture;
+            curr.quality = quality;
+            curr.isQuestItem = isQuestItem;
+            curr.questId = questId;
+            curr.isActive = isActive;
 
-         curr.count = curr.count + itemCount;
+            curr.count = curr.count + itemCount;
+         end
       end
 
       currentBagNum = currentBagNum + 1;
