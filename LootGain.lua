@@ -165,8 +165,8 @@ local function GetVariablePlayerInfo(player)
    end
    player.numCurrencies = numCurrencies;
 
-   -- inventory
-   player.inventory = { };
+   -- items
+   player.items = { };
    local currentBagNum = 0;
    while GetBagName(currentBagNum) do
       local numSlots = GetContainerNumSlots(currentBagNum);
@@ -176,8 +176,8 @@ local function GetVariablePlayerInfo(player)
          local isQuestItem, questId, isActive = GetContainerItemQuestInfo(currentBagNum, currentSlotNum);
 
          if itemLink ~= nil then
-            player.inventory[itemLink] = player.inventory[itemLink] or { count = 0 };
-            local curr = player.inventory[itemLink];
+            player.items[itemLink] = player.items[itemLink] or { count = 0 };
+            local curr = player.items[itemLink];
 
             curr.itemLink = itemLink;
             curr.texture = texture;
@@ -193,7 +193,7 @@ local function GetVariablePlayerInfo(player)
       currentBagNum = currentBagNum + 1;
    end
 
-   for k, v in pairs(player.inventory) do
+   for k, v in pairs(player.items) do
       LootGainPrint("Item: " .. v.itemLink .. " - " .. v.count);
    end
 end
