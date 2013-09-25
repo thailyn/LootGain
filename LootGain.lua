@@ -154,6 +154,14 @@ local function GetVariablePlayerInfo(player)
    player.inParty = UnitInParty("player");
    player.inRaid = UnitInRaid("player");
 
+   -- location
+   player.location = { };
+   player.location.zone = GetRealZoneText();
+   player.location.subZone = GetSubZoneText();
+   player.location.positionX, player.location.positionY = GetPlayerMapPosition("player");
+   LootGainPrint("Location: " .. player.location.zone .. " - " .. (player.location.subZone or "No Sub Zone") .. " (" ..
+              player.location.positionX .. ", " .. player.location.positionY .. ")");
+
    -- specializations
    player.numSpecializations = GetNumSpecializations(false, false);
    player.specializations = { };
