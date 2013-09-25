@@ -197,5 +197,9 @@ function LootGain_OnLoad(self)
 
    JoinAddonChannel();
    PrintPlayerInfo();
+
+   LootGain.player = { };
+   GetStaticPlayerInfo(LootGain.player);
+   GetVariablePlayerInfo(LootGain.player);
 end
 
