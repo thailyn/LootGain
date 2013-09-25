@@ -192,6 +192,10 @@ local function GetVariablePlayerInfo(player)
 
       currentBagNum = currentBagNum + 1;
    end
+
+   for k, v in pairs(player.inventory) do
+      LootGainPrint("Item: " .. v.itemLink .. " - " .. v.count);
+   end
 end
 
 function LootGain_OnLoad(self)
