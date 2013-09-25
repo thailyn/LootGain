@@ -44,6 +44,13 @@ local function LootGainPrint(message)
    end
 end
 
+local function GetInventorySlotIds(inventorySlots, inventorySlotIds)
+   for k, v in pairs(inventorySlots) do
+      local slotId, textureName = GetInventorySlotInfo(v);
+      inventorySlotIds[v] = slotId;
+   end
+end
+
 local function JoinAddonChannel()
    local channelType, channelName = JoinChannelByName(addonChannelName);
    addonChannelId = GetChannelName(addonChannelName);
