@@ -326,5 +326,7 @@ function LootGain_OnLoad(self)
    LootGain.player = { };
    GetStaticPlayerInfo(LootGain.player);
    GetVariablePlayerInfo(LootGain.player);
+
+   RegisterEvents(self);
 end
 
