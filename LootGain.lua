@@ -245,7 +245,7 @@ local function GetVariablePlayerInfo(player)
    end
 
    for k, v in pairs(player.items) do
-      LootGainPrint("Item: " .. v.itemLink .. " - " .. v.count);
+      LootGainPrint("Item: " .. v.itemLink .. " - " .. gsub(v.itemLink, "\124", "\124\124") .. " - " .. v.count);
    end
 end
 
