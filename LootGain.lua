@@ -245,6 +245,10 @@ local function GetVariablePlayerInfo(player)
       end
    end
 
+   -- todo: Record bank items.  Note that this info should be cached between
+   --       sessions and between calls, as that information is not always
+   --       available.
+
    for k, v in pairs(player.items) do
       LootGainPrint("Item: " .. v.itemLink .. " - " .. gsub(v.itemLink, "\124", "\124\124") .. " - " .. v.count);
    end
