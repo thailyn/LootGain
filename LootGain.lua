@@ -258,6 +258,7 @@ local function GetVariablePlayerInfo(player)
       end
    end
 
+   --[[
    for k, v in pairs(player.items) do
       LootGainPrint("Item: " .. v.itemLink .. " - " .. gsub(v.itemLink, "\124", "\124\124") .. " - " .. v.count);
    end
@@ -273,6 +274,7 @@ local function GetVariablePlayerInfo(player)
    for k, v in pairs(player.professions) do
       LootGainPrint("Profession: " .. v.name .. " - " .. v.skillLevel .. "(+" .. v.skillModifier .. ")/" .. v.maxSkillLevel);
    end
+   --]]
 end
 
 function LootGain_OnLoad(self)
