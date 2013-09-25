@@ -240,8 +240,6 @@ local function GetVariablePlayerInfo(player)
          player.items[itemLink] = player.items[itemLink] or { count = 0 };
          player.items[itemLink].itemLink = itemLink;
          player.items[itemLink].count = player.items[itemLink].count + 1;
-      else
-         LootGainPrint("Slot " .. k .. " is nil.");
       end
    end
 
