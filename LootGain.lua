@@ -2,6 +2,9 @@ LootGain = { };
 LootGain.version = "0.01";
 LootGain.dataVersion = 1;
 
+LootGain.numRecentMouseoverUnits = 0;
+LootGain.recentMouseoverUnits = { };
+
 local addonChannelName = "LootGain3950";
 local addonChannelId = nil;
 
