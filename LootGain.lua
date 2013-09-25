@@ -289,6 +289,23 @@ local function GetVariablePlayerInfo(player)
    --]]
 end
 
+function LootGain_OnEvent(self, event, ...)
+   if event == "UPDATE_MOUSEOVER_UNIT" then
+      local mouseoverGuid = UnitGUID("mouseover");
+      --LootGainPrint("Mouseover GUID: " .. (UnitGUID("mouseover") or "nil"));
+
+      if (not LootGain.recentMouseoverUnits[mouseoverGuid]) then
+         LootGain.numRecentMouseoverUnits = LootGain.numRecentMouseoverUnits + 1;
+      end
+      LootGain.recentMouseoverUnits[mouseoverGuid] = time();
+
+      --LootGainPrint("Mouseover list (" .. LootGain.numRecentMouseoverUnits .. ")");
+      --for k, v in pairs(LootGain.recentMouseoverUnits) do
+      --   LootGainPrint("Mouseover: " .. k .. " - " .. date("%m/%d/%y %H:%M:%S", v));
+      --end
+   end
+end
+
 local function RegisterEvents(self)
    --this:RegisterEvent("PLAYER_ENTERING_WORLD");
    --this:RegisterEvent("LOOT_OPENED");
