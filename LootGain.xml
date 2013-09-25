@@ -5,6 +5,7 @@
       <OnLoad>
         LootGain_OnLoad(self);
       </OnLoad>
+      <OnEvent function="LootGain_OnEvent" />
     </Scripts>
   </Frame>
 </Ui>
