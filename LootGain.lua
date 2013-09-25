@@ -168,7 +168,7 @@ local function GetVariablePlayerInfo(player)
    -- inventory
    player.inventory = { };
    local currentBagNum = 0;
-   while GetBagNum(currentBagNum) do
+   while GetBagName(currentBagNum) do
       local numSlots = GetContainerNumSlots(currentBagNum);
       for currentSlotNum = 1, numSlots do
          local itemLink = GetContainerItemLink(currentBagNum, currentSlotNum);
