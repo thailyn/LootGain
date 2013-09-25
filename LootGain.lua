@@ -145,6 +145,7 @@ local function GetStaticPlayerInfo(player)
    --player.server = ...;
    player.class = UnitClass("player");
    player.race = UnitRace("player");
+   player.sex = UnitSex("player");
 end
 
 local function GetVariablePlayerInfo(player)
