@@ -168,25 +168,29 @@ local function GetVariablePlayerInfo(player)
    -- items
    player.items = { };
    local currentBagNum = 0;
-   while GetBagName(currentBagNum) do
-      local numSlots = GetContainerNumSlots(currentBagNum);
-      for currentSlotNum = 1, numSlots do
-         local itemLink = GetContainerItemLink(currentBagNum, currentSlotNum);
-         local texture, itemCount, locked, quality, readable = GetContainerItemInfo(currentBagNum, currentSlotNum);
-         local isQuestItem, questId, isActive = GetContainerItemQuestInfo(currentBagNum, currentSlotNum);
+   local maxBagNum = 4;
+   for currentBagNum = 0, maxBagNum do
+      local bagName = GetBagName(currentBagNum);
+      if (bagName) then
+         local numSlots = GetContainerNumSlots(currentBagNum);
+         for currentSlotNum = 1, numSlots do
+            local itemLink = GetContainerItemLink(currentBagNum, currentSlotNum);
+            local texture, itemCount, locked, quality, readable = GetContainerItemInfo(currentBagNum, currentSlotNum);
+            local isQuestItem, questId, isActive = GetContainerItemQuestInfo(currentBagNum, currentSlotNum);
 
-         if itemLink ~= nil then
-            player.items[itemLink] = player.items[itemLink] or { count = 0 };
-            local curr = player.items[itemLink];
+            if itemLink ~= nil then
+               player.items[itemLink] = player.items[itemLink] or { count = 0 };
+               local curr = player.items[itemLink];
 
-            curr.itemLink = itemLink;
-            curr.texture = texture;
-            curr.quality = quality;
-            curr.isQuestItem = isQuestItem;
-            curr.questId = questId;
-            curr.isActive = isActive;
+               curr.itemLink = itemLink;
+               curr.texture = texture;
+               curr.quality = quality;
+               curr.isQuestItem = isQuestItem;
+               curr.questId = questId;
+               curr.isActive = isActive;
 
-            curr.count = curr.count + itemCount;
+               curr.count = curr.count + itemCount;
+            end
          end
       end
 
