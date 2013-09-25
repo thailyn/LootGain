@@ -5,6 +5,34 @@ LootGain.dataVersion = 1;
 local addonChannelName = "LootGain3940";
 local addonChannelId = nil;
 
+local INVENTORY_SLOT_IDS = { };
+local INVENTORY_SLOTS = {
+   "HeadSlot",
+   "NeckSlot",
+   "ShoulderSlot",
+   "BackSlot",
+   "ChestSlot",
+   "ShirtSlot",
+   "TabardSlot",
+   "WristSlot",
+   "HandsSlot",
+   "WaistSlot",
+   "LegsSlot",
+   "FeetSlot",
+   "Finger0Slot",
+   "Finger1Slot",
+   "Trinket0Slot",
+   "Trinket1Slot",
+   "MainHandSlot",
+   "SecondaryHandSlot",
+   --"RangedSlot",
+   --"AmmoSlot"
+   "Bag0Slot",
+   "Bag1Slot",
+   "Bag2Slot",
+   "Bag3Slot",
+}
+
 local function LootGainPrint(message)
 -- See the SendAddonMessage function for non-human-readable messages that have
 -- fewer limitations than SendChatMessage.  Also see
