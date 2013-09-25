@@ -210,10 +210,11 @@ local function GetVariablePlayerInfo(player)
          local numSlots = GetContainerNumSlots(currentBagNum);
          for currentSlotNum = 1, numSlots do
             local itemLink = GetContainerItemLink(currentBagNum, currentSlotNum);
-            local texture, itemCount, locked, quality, readable = GetContainerItemInfo(currentBagNum, currentSlotNum);
-            local isQuestItem, questId, isActive = GetContainerItemQuestInfo(currentBagNum, currentSlotNum);
 
             if itemLink ~= nil then
+               local texture, itemCount, locked, quality, readable = GetContainerItemInfo(currentBagNum, currentSlotNum);
+               local isQuestItem, questId, isActive = GetContainerItemQuestInfo(currentBagNum, currentSlotNum);
+
                player.items[itemLink] = player.items[itemLink] or { count = 0 };
                local curr = player.items[itemLink];
 
