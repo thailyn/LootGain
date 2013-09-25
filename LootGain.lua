@@ -196,7 +196,7 @@ function LootGain_OnLoad(self)
    DEFAULT_CHAT_FRAME:AddMessage("Loot Gain 0.01 loaded.");
 
    JoinAddonChannel();
-   PrintPlayerInfo();
+   --PrintPlayerInfo();
 
    LootGain.player = { };
    GetStaticPlayerInfo(LootGain.player);
