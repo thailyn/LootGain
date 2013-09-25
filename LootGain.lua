@@ -249,6 +249,17 @@ local function GetVariablePlayerInfo(player)
    --       sessions and between calls, as that information is not always
    --       available.
 
+   -- professions
+   player.professions = { };
+   local professionIndexes = { GetProfessions() };
+   for k, v in pairs(professionIndexes) do
+      if (v ~= nil) then
+         local name, icon, skillLevel, maxSkillLevel, numAbilities, spellOffset, skillLine, skillModifier = GetProfessionInfo(v);
+         player.professions[name] = { name = name, icon = icon, skillLevel = skillLevel,
+                                      maxSkillLevel = maxSkillLevel, skillModifier = skillModifier };
+      end
+   end
+
    for k, v in pairs(player.items) do
       LootGainPrint("Item: " .. v.itemLink .. " - " .. gsub(v.itemLink, "\124", "\124\124") .. " - " .. v.count);
    end
