@@ -119,7 +119,7 @@ local function GetVariablePlayerInfo(player)
    player.inRaid = UnitInRaid("player");
 
    -- specializations
-   player.numSpecializations = GetNumSpecializations(false; false);
+   player.numSpecializations = GetNumSpecializations(false, false);
    player.specializations = { };
    for i = 1, player.numSpecializations do
       player.specializations[i] = { };
