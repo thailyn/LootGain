@@ -1,3 +1,7 @@
+LootGain = { };
+LootGain.version = "0.01";
+LootGain.dataVersion = 1;
+
 local addonChannelName = "LootGain3940";
 local addonChannelId = nil;
 
