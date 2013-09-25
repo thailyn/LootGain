@@ -232,6 +232,18 @@ local function GetVariablePlayerInfo(player)
       currentBagNum = currentBagNum + 1;
    end
 
+   -- inventory
+   for k, v in pairs(INVENTORY_SLOT_IDS) do
+      local itemLink = GetInventoryItemLink("player", v);
+      if itemLink ~= nil then
+         player.items[itemLink] = player.items[itemLink] or { count = 0 };
+         player.items[itemLink].itemLink = itemLink;
+         player.items[itemLink].count = player.items[itemLink].count + 1;
+      else
+         LootGainPrint("Slot " .. k .. " is nil.");
+      end
+   end
+
    for k, v in pairs(player.items) do
       LootGainPrint("Item: " .. v.itemLink .. " - " .. v.count);
    end
