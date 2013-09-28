@@ -482,6 +482,7 @@ local function GetLootInformation()
 
    DetermineLootSourceTypes(LootGain.recentLootActions, sources);
    AssignSourcesToUnitsList(LootGain.recentMouseoverUnits, sources);
+   RecordNewLootSources(sources);
 
    for k, v in pairs (sources) do
       local mousedOverTime = LootGain.recentMouseoverUnits[v.guid];
