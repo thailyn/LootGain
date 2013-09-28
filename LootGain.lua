@@ -514,6 +514,7 @@ function LootGain_OnEvent(self, event, ...)
       if (not LootGain.recentMouseoverUnits[mouseoverGuid]) then
          LootGain.recentMouseoverUnits[mouseoverGuid] = {
             lastMouseoverTime = nil,
+            loot = { }, -- keyed by loot type
          };
 
          LootGain.numRecentMouseoverUnits = LootGain.numRecentMouseoverUnits + 1;
