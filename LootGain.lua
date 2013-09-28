@@ -49,6 +49,20 @@ local INVENTORY_SLOTS = {
    "Bag3Slot",
 }
 
+local LOOT_TYPES = {
+   "LOOTING",
+   "MINING",
+   "HERB GATHERING",
+   "SKINNING",
+   "PICK POCKETING",
+   "OPENING",
+   "DISENCHANTING",
+   "MILLING",
+   "PROSPECTING",
+   "FISHING",
+   "UNKNOWN",
+};
+
 local function LootGainPrint(message)
 -- See the SendAddonMessage function for non-human-readable messages that have
 -- fewer limitations than SendChatMessage.  Also see
