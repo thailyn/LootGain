@@ -376,6 +376,8 @@ local function GetLootInformation()
       end
    end
 
+   GetVariablePlayerInfo(LootGain.player);
+
    DetermineLootSourceTypes(LootGain.recentLootActions, sources);
 
    for k, v in pairs (sources) do
