@@ -289,6 +289,60 @@ local function GetVariablePlayerInfo(player)
    --]]
 end
 
+local function GetLootInformation()
+   local numItems = GetNumLootItems();
+   LootGainPrint("Getting information (" .. numItems .. " item(s)).");
+
+   local sources = { };
+   for i = 1, numItems do
+      local isCoin = false;
+      -- determine and record how many of each item came from each source
+      local lootSlotInfo = { GetLootSourceInfo(i) };
+      local numItemSources = #lootSlotInfo / 2;
+
+      local itemLink = GetLootSlotLink(i);
+      local lootIcon, lootName, lootQuantity, lootQuality, locked, isQuestItem, questID, isActive = GetLootSlotInfo(i)
+      if (lootQuantity == 0) then
+         isCoin = true;
+      end
+
+      for j = 0, numItemSources - 1 do
+         local itemSourceGuid = lootSlotInfo[2 * j + 1];
+         local itemSourceCount = lootSlotInfo[2 * j + 2];
+
+         if (not sources[itemSourceGuid]) then
+            sources[itemSourceGuid] = { items = { } };
+            -- initialize source
+            sources[itemSourceGuid].guid = itemSourceGuid;
+         end
+
+         if (isCoin) then
+            if (not sources[itemSourceGuid].coins) then
+               sources[itemSourceGuid].coins = 0;
+            end
+            sources[itemSourceGuid].coins = sources[itemSourceGuid].coins + itemSourceCount;
+         else
+            if (not sources[itemSourceGuid].items[itemLink]) then
+               sources[itemSourceGuid].items[itemLink] = 0;
+            end
+            sources[itemSourceGuid].items[itemLink] = sources[itemSourceGuid].items[itemLink] + itemSourceCount;
+         end
+      end
+      for k, v in pairs (lootSlotInfo) do
+         LootGainPrint("Loot: " .. k .. " - " .. v);
+      end
+   end
+
+   for k, v in pairs (sources) do
+      local mousedOverTime = LootGain.recentMouseoverUnits[v.guid];
+      LootGainPrint("Source: " .. v.guid .. " (" .. (mousedOverTime or "Never") .. ")");
+      LootGainPrint("  Coins: " .. (v.coins or "None"));
+      for k2, v2 in pairs (v.items) do
+         LootGainPrint("  Item: " .. (k2 or "nil") .. " - " .. v2);
+      end
+   end
+end
+
 function LootGain_OnEvent(self, event, ...)
    if event == "UPDATE_MOUSEOVER_UNIT" then
       local mouseoverGuid = UnitGUID("mouseover");
