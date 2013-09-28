@@ -379,6 +379,7 @@ local function GetLootInformation()
    GetVariablePlayerInfo(LootGain.player);
 
    DetermineLootSourceTypes(LootGain.recentLootActions, sources);
+   AssignSourcesToUnitsList(LootGain.recentMouseoverUnits, sources);
 
    for k, v in pairs (sources) do
       local mousedOverTime = LootGain.recentMouseoverUnits[v.guid];
