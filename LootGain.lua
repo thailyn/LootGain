@@ -409,6 +409,22 @@ function LootGain_OnEvent(self, event, ...)
       --LootGainPrint("Mouseover GUID: " .. (UnitGUID("mouseover") or "nil"));
 
       if (not LootGain.recentMouseoverUnits[mouseoverGuid]) then
+         LootGain.recentMouseoverUnits[mouseoverGuid] = {
+            lastMouseoverTime = nil,
+            looted = false,
+            info = {
+               name = UnitName("mouseover"),
+               level = UnitLevel("mouseover"),
+               class = UnitClass("mouseover"),
+               race = UnitRace("mouseover"),
+               sex = UnitSex("mouseover"),
+               classification = UnitClassification("mouseover"),
+               creatureFamily = UnitCreatureFamily("mouseover"),
+               creatureType = UnitCreatureType("mouseover"),
+               isPlayer = UnitIsPlayer("mouseover"),
+            },
+         };
+
          LootGain.numRecentMouseoverUnits = LootGain.numRecentMouseoverUnits + 1;
       end
       LootGain.recentMouseoverUnits[mouseoverGuid] = time();
