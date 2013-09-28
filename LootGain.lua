@@ -89,6 +89,32 @@ local function JoinAddonChannel()
    LootGainPrint("Channel Name: " .. (channelName or "nil"));
 end
 
+local function LootGain_PrintGlobalDataKey(key, value, indent)
+   if (type(value) == "table") then
+      LootGainPrint(indent .. key .. " - " .. "(table)");
+      local nextIndent = indent .. "  ";
+      for k, v in pairs (value) do
+         LootGain_PrintGlobalDataKey(k, v, nextIndent);
+      end
+   elseif (type(value) == "boolean") then
+      LootGainPrint(indent .. key .. " - " .. (value and "true" or "false"));
+   elseif (type(value) == "nil") then
+      LootGainPrint(indent .. key .. " - " .. "nil");
+   else
+      LootGainPrint(indent .. key .. " - " .. value);
+   end
+end
+
+function LootGain_PrintGlobalData()
+   LootGainPrint(#LootGain_Data.sources .. " sources.");
+   for k, source in ipairs (LootGain_Data.sources) do
+      LootGainPrint(k .. ": ");
+      for k2, v2 in pairs (source) do
+         LootGain_PrintGlobalDataKey(k2, v2, "  ");
+      end
+   end
+end
+
 local function GetStaticPlayerInfo(player)
    player.loginTime = time();
    player.name = UnitName("player");
