@@ -76,7 +76,7 @@ end
 local function GetStaticPlayerInfo(player)
    player.loginTime = time();
    player.name = UnitName("player");
-   --player.server = ...;
+   player.server = GetRealmName();
    player.class = UnitClass("player");
    player.race = UnitRace("player");
    player.sex = UnitSex("player");
