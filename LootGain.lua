@@ -239,6 +239,12 @@ local function GetVariablePlayerInfo(player)
    --]]
 end
 
+local function DetermineLootSourceTypes(recentLootActions, sources)
+   for k, v in pairs (sources) do
+      v.lootType = "UNKNOWN";
+   end
+end
+
 local function GetLootInformation()
    local numItems = GetNumLootItems();
    LootGainPrint("Getting information (" .. numItems .. " item(s)).");
