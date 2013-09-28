@@ -539,6 +539,12 @@ function LootGain_OnEvent(self, event, ...)
             creatureType = UnitCreatureType("mouseover"),
             isPlayer = UnitIsPlayer("mouseover"),
          };
+
+         for k, v in pairs (LootGain.recentMouseoverUnits[mouseoverGuid].loot) do
+            if (not v.recorded) then
+               RecordNewUnitSource(LootGain.recentMouseoverUnits[mouseoverGuid], k);
+            end
+         end
       end
 
       --LootGainPrint("Mouseover list (" .. LootGain.numRecentMouseoverUnits .. ")");
