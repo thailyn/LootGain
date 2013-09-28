@@ -7,6 +7,11 @@ LootGain.recentMouseoverUnits = { };
 
 LootGain.recentLootActions = { };
 
+LootGain.channel = {
+   name = "LootGain3940",
+   id = nil,
+}
+
 -- Global data
 LootGain_Data = LootGain_Data or {
    sources = { }
@@ -16,10 +21,6 @@ LootGain_Data = LootGain_Data or {
 LootGain_CharacterData = LootGain_CharacterData or {
    recentUnits = { }
 };
-
-
-local addonChannelName = "LootGain3950";
-local addonChannelId = nil;
 
 local INVENTORY_SLOT_IDS = { };
 local INVENTORY_SLOTS = {
@@ -67,8 +68,8 @@ local function LootGainPrint(message)
 -- See the SendAddonMessage function for non-human-readable messages that have
 -- fewer limitations than SendChatMessage.  Also see
 -- RegisterAddonMessagePrefix.
-   if (addonChannelId ~= nil) then
-      SendChatMessage(message, "CHANNEL", nil, addonChannelId);
+   if (LootGain.channel.id ~= nil) then
+      SendChatMessage(message, "CHANNEL", nil, LootGain.channel.id);
    else
       DEFAULT_CHAT_FRAME:AddMessage(message);
    end
@@ -82,8 +83,8 @@ local function GetInventorySlotIds(inventorySlots, inventorySlotIds)
 end
 
 local function JoinAddonChannel()
-   local channelType, channelName = JoinChannelByName(addonChannelName);
-   addonChannelId = GetChannelName(addonChannelName);
+   local channelType, channelName = JoinChannelByName(LootGain.channel.name);
+   LootGain.channel.id = GetChannelName(LootGain.channel.name);
 
    LootGainPrint("Channel Type: " .. (channelType or "nil"));
    LootGainPrint("Channel Name: " .. (channelName or "nil"));
