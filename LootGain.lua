@@ -377,7 +377,6 @@ function LootGain_OnLoad(self)
    GetInventorySlotIds(INVENTORY_SLOTS, INVENTORY_SLOT_IDS);
 
    JoinAddonChannel();
-   --PrintPlayerInfo();
 
    LootGain.player = { };
    GetStaticPlayerInfo(LootGain.player);
