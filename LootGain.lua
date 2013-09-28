@@ -80,6 +80,9 @@ local function GetStaticPlayerInfo(player)
    player.class = UnitClass("player");
    player.race = UnitRace("player");
    player.sex = UnitSex("player");
+
+   player.system = { };
+   player.system.version, player.system.build, player.system.date, player.system.tocVersion = GetBuildInfo();
 end
 
 local function GetVariablePlayerInfo(player)
