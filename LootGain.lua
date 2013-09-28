@@ -523,6 +523,7 @@ function LootGain_OnEvent(self, event, ...)
          --   LootGainPrint("  " .. k .. ": " .. (v or "nil"));
          --end
       end
+
       LootGain.recentMouseoverUnits[mouseoverGuid].lastMouseoverTime = time();
 
       if (not LootGain.recentMouseoverUnits[mouseoverGuid].info) then
