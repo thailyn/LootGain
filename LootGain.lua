@@ -322,21 +322,61 @@ local function GetLootInformation()
          local itemSourceCount = lootSlotInfo[2 * j + 2];
 
          if (not sources[itemSourceGuid]) then
-            sources[itemSourceGuid] = { items = { } };
-            -- initialize source
-            sources[itemSourceGuid].guid = itemSourceGuid;
+            sources[itemSourceGuid] = {
+               guid = itemSourceGuid,
+               slots = { },
+               items = { },
+            };
          end
 
          if (isCoin) then
-            if (not sources[itemSourceGuid].coins) then
-               sources[itemSourceGuid].coins = 0;
+            -- fill in the items table
+            if (not sources[itemSourceGuid].items.coins) then
+               sources[itemSourceGuid].items.coins = {
+                  isCoin = true,
+                  looted = false,
+               };
+               --sources[itemSourceGuid].coins = 0;
             end
-            sources[itemSourceGuid].coins = sources[itemSourceGuid].coins + itemSourceCount;
+            if (not sources[itemSourceGuid].items.coins[i]) then
+               sources[itemSourceGuid].items.coins[i] = 0;
+            end
+            sources[itemSourceGuid].items.coins[i] = sources[itemSourceGuid].items.coins[i] + itemSourceCount;
+
+            -- fill in the slots table
+            if (not sources[itemSourceGuid].slots[i]) then
+               sources[itemSourceGuid].slots[i] = {
+                  isCoin = true,
+                  looted = false,
+                  quantity = 0,
+               };
+            end
+            sources[itemSourceGuid].slots[i].quantity = sources[itemSourceGuid].slots[i].quantity + itemSourceCount;
          else
+            -- fill in the items table
+            -- initialize the information about the item
             if (not sources[itemSourceGuid].items[itemLink]) then
-               sources[itemSourceGuid].items[itemLink] = 0;
+               sources[itemSourceGuid].items[itemLink] = {
+                  isCoin = false,
+                  looted = false,
+               };
             end
-            sources[itemSourceGuid].items[itemLink] = sources[itemSourceGuid].items[itemLink] + itemSourceCount;
+            -- initialize the information about the item in that slot
+            if (not sources[itemSourceGuid].items[itemLink][i]) then
+               sources[itemSourceGuid].items[itemLink][i] = 0;
+            end
+            sources[itemSourceGuid].items[itemLink][i] = sources[itemSourceGuid].items[itemLink][i] + itemSourceCount;
+
+            -- fill in the slots table
+            if (not sources[itemSourceGuid].slots[i]) then
+               sources[itemSourceGuid].slots[i] = {
+                  isCoin = false,
+                  looted = false,
+                  itemLink = itemLink,
+                  quantity = 0,
+               };
+            end
+            sources[itemSourceGuid].slots[i].quantity = sources[itemSourceGuid].slots[i].quantity + itemSourceCount;
          end
       end
       for k, v in pairs (lootSlotInfo) do
