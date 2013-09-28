@@ -357,6 +357,8 @@ function LootGain_OnEvent(self, event, ...)
       --for k, v in pairs(LootGain.recentMouseoverUnits) do
       --   LootGainPrint("Mouseover: " .. k .. " - " .. date("%m/%d/%y %H:%M:%S", v));
       --end
+   elseif event == "LOOT_OPENED" then
+      GetLootInformation();
    end
 end
 
