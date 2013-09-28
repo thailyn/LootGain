@@ -383,7 +383,8 @@ local function GetLootInformation()
 
    for k, v in pairs (sources) do
       local mousedOverTime = LootGain.recentMouseoverUnits[v.guid];
-      LootGainPrint("Source: " .. v.guid .. " - " .. v.lootType .. " (" ..
+      LootGainPrint("Source: " .. v.guid .. " (" .. (v.unitReference.info and v.unitReference.info.name
+                                                     or "Unknown Name") .. ") - " .. v.lootType .. " (" ..
                     (mousedOverTime.lastMouseoverTime or "Never") .. ")");
       for k2, v2 in pairs (v.slots) do
          LootGainPrint("  Slot: " .. (k2 or "nil") .. ": " ..
