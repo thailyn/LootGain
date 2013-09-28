@@ -411,7 +411,7 @@ function LootGain_OnEvent(self, event, ...)
       if (not LootGain.recentMouseoverUnits[mouseoverGuid]) then
          LootGain.recentMouseoverUnits[mouseoverGuid] = {
             lastMouseoverTime = nil,
-            looted = false,
+            recorded = false,
             info = {
                name = UnitName("mouseover"),
                level = UnitLevel("mouseover"),
