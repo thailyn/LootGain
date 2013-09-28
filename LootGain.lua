@@ -5,6 +5,17 @@ LootGain.dataVersion = 1;
 LootGain.numRecentMouseoverUnits = 0;
 LootGain.recentMouseoverUnits = { };
 
+-- Global data
+LootGain_Data = LootGain_Data or {
+   sources = { }
+};
+
+-- Character-specific data
+LootGain_CharacterData = LootGain_CharacterData or {
+   recentUnits = { }
+};
+
+
 local addonChannelName = "LootGain3950";
 local addonChannelId = nil;
 
