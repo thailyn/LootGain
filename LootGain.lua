@@ -387,9 +387,18 @@ local function GetLootInformation()
    for k, v in pairs (sources) do
       local mousedOverTime = LootGain.recentMouseoverUnits[v.guid];
       LootGainPrint("Source: " .. v.guid .. " (" .. (mousedOverTime or "Never") .. ")");
-      LootGainPrint("  Coins: " .. (v.coins or "None"));
-      for k2, v2 in pairs (v.items) do
-         LootGainPrint("  Item: " .. (k2 or "nil") .. " - " .. v2);
+      for k2, v2 in pairs (v.slots) do
+         LootGainPrint("  Slot: " .. (k2 or "nil") .. ": " .. (v2.itemLink or "Coins") .. " - " .. v2.quantity);
+      end
+
+      for itemLink, itemInfo in pairs (v.items) do
+         local outputString = "";
+         for j = 1, table.maxn(itemInfo) do
+            if itemInfo[j] then
+               outputString = outputString .. j .. " - " .. itemInfo[j] .. ", ";
+            end
+         end
+         LootGainPrint("  Item: " .. (itemLink or "nil") .. ": " .. (outputString or "nil"));
       end
    end
 end
