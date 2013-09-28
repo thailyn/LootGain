@@ -426,6 +426,10 @@ function LootGain_OnEvent(self, event, ...)
          };
 
          LootGain.numRecentMouseoverUnits = LootGain.numRecentMouseoverUnits + 1;
+
+         --for k, v in pairs(LootGain.recentMouseoverUnits[mouseoverGuid].info) do
+         --   LootGainPrint("  " .. k .. ": " .. (v or "nil"));
+         --end
       end
       LootGain.recentMouseoverUnits[mouseoverGuid].lastMouseoverTime = time();
 
