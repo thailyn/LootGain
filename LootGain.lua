@@ -5,6 +5,8 @@ LootGain.dataVersion = 1;
 LootGain.numRecentMouseoverUnits = 0;
 LootGain.recentMouseoverUnits = { };
 
+LootGain.recentLootActions = { };
+
 -- Global data
 LootGain_Data = LootGain_Data or {
    sources = { }
