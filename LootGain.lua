@@ -427,7 +427,7 @@ function LootGain_OnEvent(self, event, ...)
 
          LootGain.numRecentMouseoverUnits = LootGain.numRecentMouseoverUnits + 1;
       end
-      LootGain.recentMouseoverUnits[mouseoverGuid] = time();
+      LootGain.recentMouseoverUnits[mouseoverGuid].lastMouseoverTime = time();
 
       --LootGainPrint("Mouseover list (" .. LootGain.numRecentMouseoverUnits .. ")");
       --for k, v in pairs(LootGain.recentMouseoverUnits) do
