@@ -271,6 +271,27 @@ local function DetermineLootSourceTypes(recentLootActions, sources)
    end
 end
 
+local function AssignSourcesToUnitsList(units, sources)
+   for k, source in pairs (sources) do
+      local sourceGuid = source.guid;
+      if (not units[sourceGuid]) then
+         units[sourceGuid] = {
+            loot = { },
+         };
+         -- increment mouseover units, too
+      end
+
+      if (not units[sourceGuid].loot[source.lootType]) then
+         units[sourceGuid].loot[source.lootType] = {
+            recorded = false,
+            recordedTime = nil,
+            slots = source.slots,
+         };
+      end
+      source.unitReference = units[sourceGuid];
+   end
+end
+
 local function GetLootInformation()
    local numItems = GetNumLootItems();
    LootGainPrint("Getting information (" .. numItems .. " item(s)).");
