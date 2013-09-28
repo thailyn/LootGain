@@ -329,6 +329,8 @@ local function GetLootInformation()
       end
    end
 
+   DetermineLootSourceTypes(LootGain.recentLootActions, sources);
+
    for k, v in pairs (sources) do
       local mousedOverTime = LootGain.recentMouseoverUnits[v.guid];
       LootGainPrint("Source: " .. v.guid .. " (" .. (mousedOverTime or "Never") .. ")");
