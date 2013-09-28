@@ -292,6 +292,108 @@ local function AssignSourcesToUnitsList(units, sources)
    end
 end
 
+-- Record a unit source for a certain type of loot.
+-- This is created when mousing over a unit.
+local function RecordNewUnitSource(source, lootType)
+   if (not source.info) then
+      LootGainPrint("ERROR: Attempt to record unit source without info.");
+   elseif (source.loot[lootType].recorded) then
+      LootGainPrint("Skipping source " .. source.info.guid .. " - " .. lootType
+                    .. ": already recorded at " .. source.loot[lootType].recordedTime);
+   else
+      local sourceNum = #LootGain_Data.sources + 1;
+      LootGainPrint("Recording source " .. source.info.guid .. " - " .. lootType .. " as source " .. sourceNum);
+
+      -- get player info needed for logging
+      -- (todo: currencies)
+      local player = LootGain.player;
+      local quests = { };
+      for k, v in pairs (player.quests) do
+         quests[#quests + 1] = v.id
+      end
+
+      local items = { };
+      for k, v in pairs (player.items) do
+         if (v.isQuestItem) then
+            items[#items + 1] = {
+               v.itemLink,
+               v.questId,
+               count,
+            };
+         end
+      end
+
+      local professions = { };
+      for k, v in pairs (player.professions) do
+         professions[#professions + 1] = {
+            v.name,
+            v.skillLevel,
+            v.maxSkillLevel,
+            v.skillModifier,
+         }
+      end
+      LootGain_Data.sources[sourceNum] = {
+         LootGain.dataVersion,
+         player.system.build,
+         time(),
+         player.name,
+         player.server,
+         player.race,
+         player.sex,
+         player.class,
+         player.level,
+         player.inParty or false,
+         player.inRaid or false,
+         player.location.zone,
+         player.location.subZone,
+         (player.currentSpecialization and player.currentSpecialization.id or false),
+         quests, -- quests
+         { }, -- currencies (do this later)
+         items, -- items
+         professions, -- professions
+
+         source.info.guid,
+         source.info.name,
+         source.info.level,
+         source.info.class,
+         source.info.race,
+         source.info.sec,
+         source.info.classification,
+         source.info.creatureFamily,
+         source.info.creatureType,
+         source.isPlayer,
+         lootType,
+         source.loot[lootType].slots, -- loot
+      };
+      source.loot[lootType].recordedTime = time();
+      source.loot[lootType].recorded = true;
+   end
+end
+
+-- Record a single loot source.
+local function RecordNewLootSource(source)
+   local lootType = source.lootType;
+   local unitReference = source.unitReference;
+
+   if (unitReference.info) then
+      RecordNewUnitSource(unitReference, lootType);
+   else
+      LootGainPrint("Skipping source " .. source.guid .. " - " .. lootType
+                    .. ": No unit information available (probably never moused over or targeted).");
+   end
+end
+
+-- Record a list of loot sources
+-- A loot source is created from the sources referenced in the loot window.
+-- This should reference a unit source (assuming the source has been moused
+-- over previously).  If the unit source does not exist or does not have
+-- sufficient information, the recording will be skipped.
+local function RecordNewLootSources(sources)
+   for k, source in pairs (sources) do
+      RecordNewLootSource(source);
+   end
+end
+
 local function GetLootInformation()
    local numItems = GetNumLootItems();
    LootGainPrint("Getting information (" .. numItems .. " item(s)).");
