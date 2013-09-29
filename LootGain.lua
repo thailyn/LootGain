@@ -511,6 +511,21 @@ local function GetLootInformation()
    end
 end
 
+local function PurgeOldMouseoverUnits(mouseoverUnits)
+   local timeSinceMouseover;
+   local currentTime = time();
+   for k, v in pairs (mouseoverUnits) do
+      if (v.lastMouseoverTime) then
+         timeSinceMouseover = currentTime - v.lastMouseoverTime;
+         if (timeSinceMouseover > LootGain.settings.unitTimeout) then
+            LootGainPrint("Purging mouseover unit " .. k .. ".  Time since mouseover: " .. timeSinceMouseover .. ".");
+            mouseoverUnits[k] = nil;
+            LootGain.numRecentMouseoverUnits = LootGain.numRecentMouseoverUnits - 1;
+         end
+      end
+   end
+end
+
 function LootGain_OnEvent(self, event, ...)
    if event == "UPDATE_MOUSEOVER_UNIT" then
       local mouseoverGuid = UnitGUID("mouseover");
