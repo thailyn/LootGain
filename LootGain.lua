@@ -362,7 +362,7 @@ local function RecordNewUnitSource(source, lootType)
          source.info.level,
          source.info.class,
          source.info.race,
-         source.info.sec,
+         source.info.sex,
          source.info.classification,
          source.info.creatureFamily,
          source.info.creatureType,
