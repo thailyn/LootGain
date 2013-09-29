@@ -550,6 +550,11 @@ end
 local function Initialize()
    LootGainPrint("In Initialize function.");
    LootGain.initialized = true;
+
+   -- fill in missing settings
+   LootGain_CharacterData.settings = LootGain_CharacterData.settings or {
+      verbose = LootGain.settings.verbose,
+   };
 end
 
 function LootGain_OnEvent(self, event, ...)
