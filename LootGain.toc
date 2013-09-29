@@ -3,6 +3,8 @@
 ## Notes: Nothing to say just yet.
 ## Version: 0.01
 ## DefaultState: disabled
+## SavedVariables: LootGain_Data
+## SavedVariablesPerCharacter: LootGain_CharacterData
 
 LootGain.lua
 LootGain.xml
