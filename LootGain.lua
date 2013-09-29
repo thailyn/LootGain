@@ -16,16 +16,6 @@ LootGain.settings = {
    unitTimeout = 60 * 20; -- 20 minutes
 };
 
--- Global data
-LootGain_Data = LootGain_Data or {
-   sources = { }
-};
-
--- Character-specific data
-LootGain_CharacterData = LootGain_CharacterData or {
-   recentUnits = { }
-};
-
 local INVENTORY_SLOT_IDS = { };
 local INVENTORY_SLOTS = {
    "HeadSlot",
@@ -531,6 +521,26 @@ local function PurgeOldMouseoverUnits(mouseoverUnits)
          end
       end
    end
+end
+
+local function LoadSavedVariables()
+   LootGainPrint("In LoadSavedVariables function.");
+
+   LootGainPrint("LootGain_Data: " .. type(LootGain_Data));
+   LootGainPrint("LootGain_CharacterData: " .. type(LootGain_CharacterData));
+
+   -- Global data
+   LootGain_Data = LootGain_Data or {
+      sources = { }
+   };
+
+   -- Character-specific data
+   LootGain_CharacterData = LootGain_CharacterData or {
+      recentUnits = { }
+   };
+   LootGain.recentMouseoverUnits = LootGain_CharacterData.recentUnits;
+
+   PurgeOldMouseoverUnits(LootGain.recentMouseoverUnits)
 end
 
 function LootGain_OnEvent(self, event, ...)
