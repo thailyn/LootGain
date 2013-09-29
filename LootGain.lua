@@ -636,6 +636,8 @@ local function RegisterEvents(self)
    self:RegisterEvent("LOOT_CLOSED");
    --this:RegisterEvent("LOOT_SLOT_CLEARED");
    self:RegisterEvent("UPDATE_MOUSEOVER_UNIT");
+   self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
+   self:RegisterEvent("CHAT_MSG_OPENING");
 end
 
 function LootGain_OnLoad(self)
