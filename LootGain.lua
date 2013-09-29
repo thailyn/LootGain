@@ -120,6 +120,13 @@ function LootGain_PrintGlobalData()
    end
 end
 
+function LootGain_PrintGlobalDataShort()
+   LootGainPrint(#LootGain_Data.sources .. " sources.");
+   for k, source in ipairs (LootGain_Data.sources) do
+      LootGainPrint(k .. ": " .. (source[20] or "nil") .. " at " .. date("%m/%d/%y %H:%M:%S", source[3]));
+   end
+end
+
 local function GetStaticPlayerInfo(player)
    player.loginTime = time();
    player.name = UnitName("player");
