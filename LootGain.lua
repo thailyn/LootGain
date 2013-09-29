@@ -12,6 +12,10 @@ LootGain.channel = {
    id = nil,
 }
 
+LootGain.settings = {
+   unitTimeout = 60 * 20; -- 20 minutes
+};
+
 -- Global data
 LootGain_Data = LootGain_Data or {
    sources = { }
