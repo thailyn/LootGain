@@ -640,7 +640,7 @@ local function RegisterEvents(self)
 end
 
 function LootGain_OnLoad(self)
-   DEFAULT_CHAT_FRAME:AddMessage("Loot Gain 0.01 loaded.");
+   DEFAULT_CHAT_FRAME:AddMessage("Loot Gain " .. LootGain.version .. " loaded.");
 
    JoinAddonChannel();
 
