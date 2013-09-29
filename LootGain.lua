@@ -4,7 +4,6 @@ LootGain.dataVersion = 1;
 LootGain.initialized = false;
 
 LootGain.numRecentMouseoverUnits = 0;
-LootGain.recentMouseoverUnits = { };
 
 LootGain.recentLootActions = { };
 
