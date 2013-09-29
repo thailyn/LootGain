@@ -1,5 +1,5 @@
 LootGain = { };
-LootGain.version = "0.01";
+LootGain.version = "0.02";
 LootGain.dataVersion = 2;
 LootGain.initialized = false;
 
