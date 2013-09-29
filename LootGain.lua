@@ -313,7 +313,7 @@ local function RecordNewUnitSource(source, lootType)
                     .. ": already recorded at " .. source.loot[lootType].recordedTime);
    else
       local sourceNum = #LootGain_Data.sources + 1;
-      LootGainPrint("Recording source " .. source.info.guid .. " - " .. lootType .. " as source " .. sourceNum);
+      LootGainPrint("Recording source " .. source.info.guid .. " - " .. source.info.name .. " - " .. lootType .. " as source " .. sourceNum);
 
       -- get player info needed for logging
       -- (todo: currencies)
