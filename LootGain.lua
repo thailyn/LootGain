@@ -537,8 +537,6 @@ local function LoadSavedVariables()
       },
    };
    LootGain.recentMouseoverUnits = LootGain_CharacterData.recentUnits;
-
-   PurgeOldMouseoverUnits(LootGain.recentMouseoverUnits)
 end
 
 local function Initialize()
@@ -555,6 +553,8 @@ local function Initialize()
    LootGain.player = { };
    GetStaticPlayerInfo(LootGain.player);
    GetVariablePlayerInfo(LootGain.player);
+
+   PurgeOldMouseoverUnits(LootGain.recentMouseoverUnits)
 end
 
 function LootGain_OnEvent(self, event, ...)
