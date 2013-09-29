@@ -617,6 +617,7 @@ function LootGain_OnEvent(self, event, ...)
       GetLootInformation();
    elseif event == "LOOT_CLOSED" then
       PurgeOldMouseoverUnits(LootGain.recentMouseoverUnits);
+      LootGain.recentLootActions = { };
    elseif event == "ADDON_LOADED" then
       local addonName = select(1, ...);
       if (addonName == "LootGain") then
