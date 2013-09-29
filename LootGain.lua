@@ -14,6 +14,7 @@ LootGain.channel = {
 
 LootGain.settings = {
    unitTimeout = 60 * 20; -- 20 minutes
+   verbose = false;
 };
 
 local INVENTORY_SLOT_IDS = { };
