@@ -306,6 +306,8 @@ end
 local function RecordNewUnitSource(source, lootType)
    if (not source.info) then
       LootGainPrint("ERROR: Attempt to record unit source without info.");
+   elseif (not source.info.name) then
+      LootGainPrint("ERROR: Attempt to record unit source without name in info.");
    elseif (source.loot[lootType].recorded) then
       LootGainPrint("Skipping source " .. source.info.guid .. " - " .. lootType
                     .. ": already recorded at " .. source.loot[lootType].recordedTime);
