@@ -143,8 +143,8 @@ local function GetVariablePlayerInfo(player)
    player.location.zone = GetRealZoneText();
    player.location.subZone = GetSubZoneText();
    player.location.positionX, player.location.positionY = GetPlayerMapPosition("player");
-   LootGainPrint("Location: " .. (player.location.zone or "No Zone") .. " - " .. (player.location.subZone or "No Sub Zone") .. " (" ..
-              player.location.positionX .. ", " .. player.location.positionY .. ")");
+   --LootGainPrint("Location: " .. (player.location.zone or "No Zone") .. " - " .. (player.location.subZone or "No Sub Zone") .. " (" ..
+   --           player.location.positionX .. ", " .. player.location.positionY .. ")");
 
    -- specializations
    player.numSpecializations = GetNumSpecializations(false, false);
