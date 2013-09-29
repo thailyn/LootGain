@@ -1,6 +1,6 @@
 LootGain = { };
 LootGain.version = "0.01";
-LootGain.dataVersion = 1;
+LootGain.dataVersion = 2;
 LootGain.initialized = false;
 
 LootGain.numRecentMouseoverUnits = 0;
