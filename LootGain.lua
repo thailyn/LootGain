@@ -63,6 +63,11 @@ local function LootGainPrint(message)
 -- See the SendAddonMessage function for non-human-readable messages that have
 -- fewer limitations than SendChatMessage.  Also see
 -- RegisterAddonMessagePrefix.
+
+   if (LootGain_CharacterData.settings and not LootGain_CharacterData.settings.verbose) then
+      return;
+   end
+
    if (LootGain.channel.id ~= nil) then
       SendChatMessage(message, "CHANNEL", nil, LootGain.channel.id);
    else
