@@ -364,6 +364,8 @@ local function RecordNewUnitSource(source, lootType)
          professions, -- professions
 
          source.info.guid,
+         --source.info.type,
+         --source.info.id,
          source.info.name,
          source.info.level,
          source.info.class,
