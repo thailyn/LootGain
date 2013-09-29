@@ -537,7 +537,10 @@ local function LoadSavedVariables()
 
    -- Character-specific data
    LootGain_CharacterData = LootGain_CharacterData or {
-      recentUnits = { }
+      recentUnits = { },
+      settings = {
+         verbose = LootGain.settings.verbose,
+      },
    };
    LootGain.recentMouseoverUnits = LootGain_CharacterData.recentUnits;
 
