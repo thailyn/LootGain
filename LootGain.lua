@@ -573,6 +573,8 @@ function LootGain_OnEvent(self, event, ...)
       --end
    elseif event == "LOOT_OPENED" then
       GetLootInformation();
+   elseif event == "LOOT_CLOSED" then
+      PurgeOldMouseoverUnits(LootGain.recentMouseoverUnits);
    end
 end
 
