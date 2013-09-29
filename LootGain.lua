@@ -543,6 +543,11 @@ local function LoadSavedVariables()
    PurgeOldMouseoverUnits(LootGain.recentMouseoverUnits)
 end
 
+local function Initialize()
+   LootGainPrint("In Initialize function.");
+   LootGain.initialized = true;
+end
+
 function LootGain_OnEvent(self, event, ...)
    if event == "UPDATE_MOUSEOVER_UNIT" then
       local mouseoverGuid = UnitGUID("mouseover");
