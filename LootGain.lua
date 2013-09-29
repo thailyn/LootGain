@@ -613,6 +613,19 @@ function LootGain_OnEvent(self, event, ...)
       --for k, v in pairs(LootGain.recentMouseoverUnits) do
       --   LootGainPrint("Mouseover: " .. k .. " - " .. date("%m/%d/%y %H:%M:%S", v));
       --end
+   elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
+      local castingUnit, spellName, extraArg, extraArg2, extraArg3, extraArg4 = ...;
+      spellName = strupper(spellName);
+      if castingUnit == "player" then
+         if (spellName == "SKINNING" or spellName == "MINING"
+             or spellName == "HERB GATHERING" or spellName == "OPENING") then
+            LootGain.recentLootActions.type = spellName;
+            LootGain.recentLootActions.time = time();
+            --LootGainPrint("Recent loot action: " .. spellName .. " at " .. date("%m/%d/%y %H:%M:%S", LootGain.recentLootActions.time) .. ".");
+         --elseif (spellName == "MILLING") then
+         --elseif (spellName == "PROSPECTING") then
+         end
+      end
    elseif event == "LOOT_OPENED" then
       GetLootInformation();
    elseif event == "LOOT_CLOSED" then
