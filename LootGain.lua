@@ -323,7 +323,7 @@ local function RecordNewUnitSource(source, lootType)
             items[#items + 1] = {
                v.itemLink,
                v.questId,
-               count,
+               v.count,
             };
          end
       end
