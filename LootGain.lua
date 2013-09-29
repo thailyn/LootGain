@@ -80,9 +80,6 @@ end
 local function JoinAddonChannel()
    local channelType, channelName = JoinChannelByName(LootGain.channel.name);
    LootGain.channel.id = GetChannelName(LootGain.channel.name);
-
-   LootGainPrint("Channel Type: " .. (channelType or "nil"));
-   LootGainPrint("Channel Name: " .. (channelName or "nil"));
 end
 
 local function LootGain_PrintGlobalDataKey(key, value, indent)
@@ -526,9 +523,6 @@ end
 
 local function LoadSavedVariables()
    LootGainPrint("In LoadSavedVariables function.");
-
-   LootGainPrint("LootGain_Data: " .. type(LootGain_Data));
-   LootGainPrint("LootGain_CharacterData: " .. type(LootGain_CharacterData));
 
    -- Global data
    LootGain_Data = LootGain_Data or {
