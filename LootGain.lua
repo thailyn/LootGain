@@ -522,8 +522,6 @@ local function PurgeOldMouseoverUnits(mouseoverUnits)
 end
 
 local function LoadSavedVariables()
-   LootGainPrint("In LoadSavedVariables function.");
-
    -- Global data
    LootGain_Data = LootGain_Data or {
       sources = { }
