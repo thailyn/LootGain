@@ -272,7 +272,11 @@ end
 
 local function DetermineLootSourceTypes(recentLootActions, sources)
    for k, v in pairs (sources) do
-      v.lootType = "UNKNOWN";
+      if (IsFishingLoot()) then
+         v.lootType = "FISHING";
+      else
+         v.lootType = "UNKNOWN";
+      end
    end
 end
 
