@@ -549,6 +549,12 @@ local function Initialize()
    LootGain_CharacterData.settings = LootGain_CharacterData.settings or {
       verbose = LootGain.settings.verbose,
    };
+
+   GetInventorySlotIds(INVENTORY_SLOTS, INVENTORY_SLOT_IDS);
+
+   LootGain.player = { };
+   GetStaticPlayerInfo(LootGain.player);
+   GetVariablePlayerInfo(LootGain.player);
 end
 
 function LootGain_OnEvent(self, event, ...)
@@ -621,13 +627,7 @@ end
 function LootGain_OnLoad(self)
    DEFAULT_CHAT_FRAME:AddMessage("Loot Gain 0.01 loaded.");
 
-   GetInventorySlotIds(INVENTORY_SLOTS, INVENTORY_SLOT_IDS);
-
    JoinAddonChannel();
-
-   LootGain.player = { };
-   GetStaticPlayerInfo(LootGain.player);
-   GetVariablePlayerInfo(LootGain.player);
 
    RegisterEvents(self);
 end
