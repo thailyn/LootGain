@@ -613,6 +613,31 @@ function LootGain_OnEvent(self, event, ...)
       --for k, v in pairs(LootGain.recentMouseoverUnits) do
       --   LootGainPrint("Mouseover: " .. k .. " - " .. date("%m/%d/%y %H:%M:%S", v));
       --end
+   elseif event == "CHAT_MSG_OPENING" then
+      local message = ...;
+
+      local startIndex, endIndex, skill, target = string.find(message, 'You perform (.-) on (.*).');
+      if (skill and target) then
+         local skillUpper = strupper(skill);
+         if (skillUpper == "SKINNING" or skillUpper == "MINING"
+             or skillUpper == "HERB GATHERING" or skillUpper == "OPENING") then
+            if (skillUpper == LootGain.recentLootActions.type) then
+               --LootGainPrint("Found matching opening action " .. skillUpper);
+               local messageTime = time();
+               local timeElapsed = messageTime - LootGain.recentLootActions.time
+               if (timeElapsed < 10) then
+                  --LootGainPrint("Matching opening action has elapsed time " .. timeElapsed
+                  --              .. " - within limit.  Using target " .. (target or "nil") .. ".");
+                  LootGain.recentLootActions.target = target;
+               else
+                  LootGainPrint("Matching opening action has elapsed time " .. timeElapsed .. " - NOT within limit.")
+               end
+            else
+               LootGainPrint("Found mismatching opening action: " .. (skillUpper or "nil")
+                          .. " is not " .. (LootGain.recentLootActions.type or "nil"));
+            end
+         end
+      end
    elseif event == "UNIT_SPELLCAST_SUCCEEDED" then
       local castingUnit, spellName, extraArg, extraArg2, extraArg3, extraArg4 = ...;
       spellName = strupper(spellName);
