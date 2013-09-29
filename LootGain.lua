@@ -409,7 +409,7 @@ end
 
 local function GetLootInformation()
    local numItems = GetNumLootItems();
-   LootGainPrint("Getting information (" .. numItems .. " item(s)).");
+   --LootGainPrint("Getting information (" .. numItems .. " item(s)).");
 
    local sources = { };
    for i = 1, numItems do
@@ -486,9 +486,9 @@ local function GetLootInformation()
             sources[itemSourceGuid].slots[i].quantity = sources[itemSourceGuid].slots[i].quantity + itemSourceCount;
          end
       end
-      for k, v in pairs (lootSlotInfo) do
-         LootGainPrint("Loot: " .. k .. " - " .. v);
-      end
+      --for k, v in pairs (lootSlotInfo) do
+      --   LootGainPrint("Loot: " .. k .. " - " .. v);
+      --end
    end
 
    GetVariablePlayerInfo(LootGain.player);
