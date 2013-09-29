@@ -579,7 +579,7 @@ end
 local function RegisterEvents(self)
    --this:RegisterEvent("PLAYER_ENTERING_WORLD");
    self:RegisterEvent("LOOT_OPENED");
-   --this:RegisterEvent("LOOT_CLOSED");
+   self:RegisterEvent("LOOT_CLOSED");
    --this:RegisterEvent("LOOT_SLOT_CLEARED");
    --this:RegisterEvent("CHAT_MSG_SPELL_SELF_BUFF");
    self:RegisterEvent("UPDATE_MOUSEOVER_UNIT");
