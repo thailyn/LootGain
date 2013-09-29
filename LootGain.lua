@@ -281,13 +281,31 @@ local function DetermineLootSourceTypes(recentLootActions, sources)
 end
 
 local function AssignSourcesToUnitsList(units, sources)
+   local currentTime = time();
+   local openingLootTimeout = 15;
+
    for k, source in pairs (sources) do
+      local isOpeningLoot = false;
       local sourceGuid = source.guid;
+
       if (not units[sourceGuid]) then
          units[sourceGuid] = {
             loot = { },
          };
          -- increment mouseover units, too
+      end
+
+      -- The assumption used here for now is that, if we performed some
+      -- gathering action (e.g., Mining), the next loot window will contain
+      -- sources *only* associated with that source.  It seems to be true for
+      -- normal situations, but not all situations have been tested.
+      if (IsFishingLoot()) then
+         source.lootType = "FISHING";
+      elseif (LootGain.recentLootActions.type ~= nil and currentTime - LootGain.recentLootActions.time < openingLootTimeout) then
+         source.lootType = LootGain.recentLootActions.type;
+         isOpeningLoot = true;
+      else
+         source.lootType = "LOOTING";
       end
 
       if (not units[sourceGuid].loot[source.lootType]) then
