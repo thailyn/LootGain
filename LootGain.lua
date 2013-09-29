@@ -601,6 +601,8 @@ function LootGain_OnEvent(self, event, ...)
 end
 
 local function RegisterEvents(self)
+   self:RegisterEvent("ADDON_LOADED");
+   self:RegisterEvent("PLAYER_ENTERING_WORLD");
    --this:RegisterEvent("PLAYER_ENTERING_WORLD");
    self:RegisterEvent("LOOT_OPENED");
    self:RegisterEvent("LOOT_CLOSED");
