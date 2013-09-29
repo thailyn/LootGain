@@ -610,7 +610,10 @@ function LootGain_OnEvent(self, event, ...)
    elseif event == "LOOT_CLOSED" then
       PurgeOldMouseoverUnits(LootGain.recentMouseoverUnits);
    elseif event == "ADDON_LOADED" then
-      LoadSavedVariables();
+      local addonName = select(1, ...);
+      if (addonName == "LootGain") then
+         LoadSavedVariables();
+      end
    elseif event == "PLAYER_ENTERING_WORLD" then
       Initialize();
    end
