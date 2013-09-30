@@ -314,6 +314,16 @@ local function AssignSourcesToUnitsList(units, sources)
             recordedTime = nil,
             slots = source.slots,
          };
+
+         if (isOpeningLoot) then
+            units[sourceGuid].info = units[sourceGuid].info or { };
+
+            -- only set the name now if it has not been set before
+            units[sourceGuid].info.name = units[sourceGuid].info.name or LootGain.recentLootActions.target;
+            units[sourceGuid].info.guid = units[sourceGuid].info.guid or sourceGuid;
+            units[sourceGuid].info.hasOpeningLoot = true;
+            units[sourceGuid].lastMouseoverTime = currentTime; -- fake this value so the unit is eventually removed
+         end
       end
       source.unitReference = units[sourceGuid];
    end
