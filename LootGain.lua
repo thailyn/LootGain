@@ -255,6 +255,24 @@ local function GetVariablePlayerInfo(player)
       end
    end
 
+   -- auras
+   player.auras = { };
+   local i = 1;
+   local auraName, auraRank, auraIcon, auraCount, auraDebuffType, _, _, auraUnitCaster, _, _, auraSpellId  = UnitAura("player", i);
+   while auraName do
+      player.auras[i] = {
+         name = auraName,
+         rank = auraRank,
+         icon = auraIcon,
+         count = auraCount,
+         debuffType = auraDebuffType,
+         unitCaster = auraUnitCaster,
+         spellId = auraSpellId,
+      };
+      i = i + 1;
+      auraName, auraRank, auraIcon, auraCount, auraDebuffType, _, _, auraUnitCaster, _, _, auraSpellId  = UnitAura("player", i);
+   end
+
    --[[
    for k, v in pairs(player.items) do
       LootGainPrint("Item: " .. v.itemLink .. " - " .. gsub(v.itemLink, "\124", "\124\124") .. " - " .. v.count);
