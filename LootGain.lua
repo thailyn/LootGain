@@ -146,6 +146,10 @@ local function GetVariablePlayerInfo(player)
    --LootGainPrint("Location: " .. (player.location.zone or "No Zone") .. " - " .. (player.location.subZone or "No Sub Zone") .. " (" ..
    --           player.location.positionX .. ", " .. player.location.positionY .. ")");
 
+   -- guild information
+   player.guildName = GetGuildInfo("player");
+   player.guildLevel = GetGuildLevel("player");
+
    -- specializations
    player.numSpecializations = GetNumSpecializations(false, false);
    player.specializations = { };
