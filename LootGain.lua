@@ -393,6 +393,17 @@ local function RecordNewUnitSource(source, lootType)
             v.skillModifier,
          }
       end
+
+      local auras = { };
+      for k, v in pairs (player.auras) do
+         auras[#auras + 1] = {
+            v.name,
+            v.rank,
+            v.count,
+            v.spellId,
+            v.unitCaster,
+         };
+      end
       LootGain_Data.sources[sourceNum] = {
          LootGain.dataVersion,
          player.system.build,
@@ -414,6 +425,7 @@ local function RecordNewUnitSource(source, lootType)
          { }, -- currencies (do this later)
          items, -- items
          professions, -- professions
+         auras, --auras
 
          source.info.guid,
          --source.info.type,
