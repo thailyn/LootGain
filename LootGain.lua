@@ -348,6 +348,16 @@ local function AssignSourcesToUnitsList(units, sources)
             units[sourceGuid].info.hasOpeningLoot = true;
             units[sourceGuid].lastMouseoverTime = currentTime; -- fake this value so the unit is eventually removed
          end
+
+         if (isFishingLoot) then
+            units[sourceGuid].info = units[sourceGuid].info or { };
+
+            -- only set the name now if it has not been set before
+            units[sourceGuid].info.name = units[sourceGuid].info.name or "Fishing";
+            units[sourceGuid].info.guid = units[sourceGuid].info.guid or sourceGuid;
+            units[sourceGuid].info.hasFishingLoot = true;
+            units[sourceGuid].lastMouseoverTime = currentTime; -- fake this value so the unit is eventually removed
+         end
       end
       source.unitReference = units[sourceGuid];
    end
