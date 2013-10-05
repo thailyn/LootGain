@@ -308,6 +308,7 @@ local function AssignSourcesToUnitsList(units, sources)
 
    for k, source in pairs (sources) do
       local isOpeningLoot = false;
+      local isFishingLoot = false;
       local sourceGuid = source.guid;
 
       if (not units[sourceGuid]) then
@@ -323,6 +324,7 @@ local function AssignSourcesToUnitsList(units, sources)
       -- normal situations, but not all situations have been tested.
       if (IsFishingLoot()) then
          source.lootType = "FISHING";
+         isFishingLoot = true;
       elseif (LootGain.recentLootActions.type ~= nil and currentTime - LootGain.recentLootActions.time < openingLootTimeout) then
          source.lootType = LootGain.recentLootActions.type;
          isOpeningLoot = true;
