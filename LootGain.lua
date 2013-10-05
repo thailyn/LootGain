@@ -390,6 +390,8 @@ local function RecordNewUnitSource(source, lootType)
          player.location.zone,
          player.location.subZone,
          (player.currentSpecialization and player.currentSpecialization.id or false),
+         player.guildName,
+         player.guildLevel,
          quests, -- quests
          { }, -- currencies (do this later)
          items, -- items
