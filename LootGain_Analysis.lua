@@ -227,9 +227,6 @@ local function LootGain_Entropy(sources, numSources, itemId)
       end
    end
 
-   LootGainPrint("Pos: " .. #splitSources.pos);
-   LootGainPrint("Neg: " .. #splitSources.neg);
-
    local sum = 0;
    for k in pairs(splits) do
       if (#splitSources[k] > 0 and numSources > 0) then
