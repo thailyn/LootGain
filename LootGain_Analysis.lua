@@ -357,25 +357,60 @@ local function LootGain_InformationGain(sources, numSources, attributeType, attr
    return baseEntropy - sum;
 end
 
-function LootGain_Test()
+function LootGain_Test(itemIdString)
    local attributes, counts = LootGain_GetAttributes();
 
-   local splitSources = LootGain_SplitSourcesOnAttribute(LootGain_Data.sources,
-                                                         "lootTypes", nil, attributes.lootTypes);
+   --local splitSources = LootGain_SplitSourcesOnAttribute(LootGain_Data.sources,
+   --                                                      "lootTypes", nil, attributes.lootTypes);
 
    --local splitSources = LootGain_SplitSourcesOnAttribute(LootGain_Data.sources,
    --                                                      "quests", 31472, attributes.lootTypes);
 
-   local itemId = "3356"; -- kingsblood
+   -- find best atribute to split the data
+   local itemId = itemIdString or "3356"; -- kingsblood
    local baseEntropy = LootGain_Entropy(LootGain_Data.sources, counts.sources, itemId);
    LootGainPrint("Base entropy: " .. baseEntropy);
-   local bestEntropyAttributeName = "";
-   local bestEntropyValue = 0;
+   local bestIGAttributeName = "";
+   local bestIGValue = 0;
    for k, v in pairs (attributes) do
       if (k ~= "quests" and k ~= "items") then
          local ig = LootGain_InformationGain(LootGain_Data.sources, counts.sources,
                                              k, nil, v, itemId);
          LootGainPrint("IG (" .. k .. ") = " .. ig);
+         if (ig > bestIGValue) then
+            bestIGAttributeName = k;
+            bestIGValue = ig;
+         end
+      end
+   end
+
+   LootGainPrint("Best IG Attribute: " .. bestIGAttributeName);
+   LootGainPrint("Best IG Value: " .. bestIGValue);
+
+   -- split data on that attribute
+   local bestSplitSources = LootGain_SplitSourcesOnAttribute(LootGain_Data.sources,
+                                                             bestIGAttributeName, nil,
+                                                             attributes[bestIGAttributeName]);
+   for k, v in pairs (bestSplitSources) do
+      local splits = { };
+      splits.pos = true;
+      splits.neg = true;
+
+      local splitSources = { pos = { }, neg = { } };
+
+      for k2, source in ipairs (v) do
+         if source[1] == 6 then
+            local numSlots = LootGain_NumSlotsOfItem(source, itemId);
+            if (numSlots > 0) then
+               splitSources.pos[#splitSources.pos + 1] = source;
+            else
+               splitSources.neg[#splitSources.neg + 1] = source;
+            end
+         end
+      end
+
+      if (#splitSources.pos > 0) then
+         LootGainPrint(k .. ": " .. #splitSources.pos / #v * 100 .. "% (" .. #splitSources.pos .. " / " .. #v .. ")");
       end
    end
 
