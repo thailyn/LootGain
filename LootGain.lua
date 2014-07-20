@@ -649,6 +649,10 @@ function LootGain_OnEvent(self, event, ...)
       local mouseoverGuid = UnitGUID("mouseover");
       --LootGainPrint("Mouseover GUID: " .. (UnitGUID("mouseover") or "nil"));
 
+      if (not mouseoverGuid) then
+         return;
+      end
+
       if (not LootGain.recentMouseoverUnits[mouseoverGuid]) then
          LootGain.recentMouseoverUnits[mouseoverGuid] = {
             lastMouseoverTime = nil,
