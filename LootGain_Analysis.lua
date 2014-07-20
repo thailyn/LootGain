@@ -334,6 +334,23 @@ local function LootGain_SplitSourcesOnAttribute(sources, attributeType, attribut
    return splitSources;
 end
 
+local function LootGain_InformationGain(sources, numSources, attributeType, attributeValue, attributeValues, itemId)
+   local baseEntropy = LootGain_Entropy(sources, numSources, itemId);
+
+   --if (attributeType ~= "quests" and attributeType ~= "items") then
+      local splitSources = LootGain_SplitSourcesOnAttribute(sources,
+                                                            attributeType, attributeValue,
+                                                            attributeValues);
+      local sum = 0;
+      for k, v in pairs (splitSources) do
+         local splitEntropy = LootGain_Entropy(v, #v, itemId);
+         sum = sum + splitEntropy * (#v / numSources);
+      end
+   --end
+
+   return baseEntropy - sum;
+end
+
 function LootGain_Test()
    local attributes, counts = LootGain_GetAttributes();
 
