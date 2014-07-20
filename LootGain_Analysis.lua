@@ -354,15 +354,23 @@ end
 function LootGain_Test()
    local attributes, counts = LootGain_GetAttributes();
 
-   --local splitSources = LootGain_SplitSourcesOnAttribute(LootGain_Data.sources,
-   --                                                      "lootTypes", nil, attributes.lootTypes);
-
    local splitSources = LootGain_SplitSourcesOnAttribute(LootGain_Data.sources,
-                                                         "quests", 31472, attributes.lootTypes);
+                                                         "lootTypes", nil, attributes.lootTypes);
 
+   --local splitSources = LootGain_SplitSourcesOnAttribute(LootGain_Data.sources,
+   --                                                      "quests", 31472, attributes.lootTypes);
 
-   for k, v in pairs (splitSources) do
-      LootGainPrint(k .. ": " .. #v);
+   local itemId = "3356"; -- kingsblood
+   local baseEntropy = LootGain_Entropy(LootGain_Data.sources, counts.sources, itemId);
+   LootGainPrint("Base entropy: " .. baseEntropy);
+   local bestEntropyAttributeName = "";
+   local bestEntropyValue = 0;
+   for k, v in pairs (attributes) do
+      if (k ~= "quests" and k ~= "items") then
+         local ig = LootGain_InformationGain(LootGain_Data.sources, counts.sources,
+                                             k, nil, v, itemId);
+         LootGainPrint("IG (" .. k .. ") = " .. ig);
+      end
    end
 
    --[[
@@ -370,16 +378,18 @@ function LootGain_Test()
    for k in pairs (attributes.items) do
       if (i > 10) then break end;
 
-      item = k;
-      itemName = attributes.items[k];
+      if (k == "3356") then
+         item = k;
+         itemName = attributes.items[k];
+         LootGainPrint("Item: " .. item .. " / " .. itemName);
 
-      LootGainPrint("Item: " .. item .. " / " .. itemName);
-      local entropy = LootGain_Entropy(LootGain_Data.sources, counts.sources, item);
-      LootGainPrint("Entropy: " .. entropy);
-
+         for k, v in pairs (splitSources) do
+            LootGainPrint(k .. ": " .. #v);
+            local entropy = LootGain_Entropy(v, #v, item);
+            LootGainPrint("Entropy: " .. entropy);
+         end
+      end
       i = i + 1;
    end
    --]]
 end
-
-
