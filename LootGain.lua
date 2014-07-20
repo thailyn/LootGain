@@ -417,42 +417,42 @@ local function RecordNewUnitSource(source, lootType)
          };
       end
       LootGain_Data.sources[sourceNum] = {
-         LootGain.dataVersion,
-         player.system.build,
-         time(),
-         player.name,
-         player.server,
-         player.race,
-         player.sex,
-         player.class,
-         player.level,
-         player.inParty or false,
-         player.inRaid or false,
-         player.location.zone,
-         player.location.subZone,
-         (player.currentSpecialization and player.currentSpecialization.id or false),
-         player.guildName,
-         player.guildLevel,
-         quests, -- quests
-         { }, -- currencies (do this later)
-         items, -- items
-         professions, -- professions
-         auras, --auras
+         LootGain.dataVersion, -- [1]
+         player.system.build, -- [2]
+         time(), -- [3]
+         player.name, -- [4]
+         player.server, -- [5]
+         player.race, -- [6]
+         player.sex, -- [7]
+         player.class, -- [8]
+         player.level, -- [9]
+         player.inParty or false, -- [10]
+         player.inRaid or false, -- [11]
+         player.location.zone, -- [12]
+         player.location.subZone, -- [13]
+         (player.currentSpecialization and player.currentSpecialization.id or false), -- [14]
+         player.guildName, -- [15]
+         player.guildLevel, -- [16]
+         quests, -- quests, [17]
+         { }, -- currencies (do this later) -- [18]
+         items, -- items, [19]
+         professions, -- professions, [20]
+         auras, --auras, [21]
 
-         source.info.guid,
+         source.info.guid, -- [22]
          --source.info.type,
          --source.info.id,
-         source.info.name,
-         source.info.level,
-         source.info.class,
-         source.info.race,
-         source.info.sex,
-         source.info.classification,
-         source.info.creatureFamily,
-         source.info.creatureType,
-         source.isPlayer,
-         lootType,
-         source.loot[lootType].slots, -- loot
+         source.info.name, -- [23]
+         source.info.level, -- [24]
+         source.info.class, -- [25]
+         source.info.race, -- [26]
+         source.info.sex, -- [27]
+         source.info.classification, -- [28]
+         source.info.creatureFamily, -- [29]
+         source.info.creatureType, -- [30]
+         source.isPlayer, -- [31]
+         lootType, -- [32]
+         source.loot[lootType].slots, -- loot, [33]
       };
       source.loot[lootType].recordedTime = time();
       source.loot[lootType].recorded = true;
