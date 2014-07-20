@@ -7,4 +7,5 @@
 ## SavedVariablesPerCharacter: LootGain_CharacterData
 
 LootGain.lua
+LootGain_Analysis.lua
 LootGain.xml
