@@ -240,9 +240,116 @@ local function LootGain_Entropy(sources, numSources, itemId)
    return entropy;
 end
 
+local function LootGain_GetSourceDatum(source, datumName)
+   if (source[1] < 6) then
+      return nil;
+   end
+
+   if (datumName == "version" or datumName == "versions") then
+      return source[2];
+   end
+
+   if (datumName == "character" or datumName == "characters") then
+      return source[4];
+   end
+
+   if (datumName == "race" or datumName == "races") then
+      return source[6];
+   end
+
+   if (datumName == "class" or datumName == "classes") then
+      return source[8];
+   end
+
+   if (datumName == "zone" or datumName == "zones") then
+      return source[12];
+   end
+
+   if (datumName == "subZone" or datumName == "subZones") then
+      return source[13];
+   end
+
+   if (datumName == "quest" or datumName == "quests") then
+      return source[17];
+   end
+
+   if (datumName == "sourceName" or datumName == "sourceNames") then
+      return source[23];
+   end
+
+   if (datumName == "lootType" or datumName == "lootTypes") then
+      return source[32];
+   end
+end
+
+local function LootGain_SourceHasQuest(source, questId)
+   local quests = LootGain_GetSourceDatum(source, "quests");
+   if (quests == nil) then
+      return nil
+   end
+
+   for k, v in ipairs (quests) do
+      if (v == questId) then
+         return true;
+      end
+   end
+
+   return false;
+end
+
+local function LootGain_SplitSourcesOnAttribute(sources, attributeType, attributeName, attributeValues)
+   local splitSources = { };
+
+   if (attributeType == "versions" or attributeType == "characters" or attributeType == "races"
+       or attributeType == "classes" or attributeType == "zones" or attributeType == "subZones"
+       or attributeType == "lootTypes" or attributeType == "sourceNames") then
+      for k, v in pairs (attributeValues) do
+         splitSources[k] = { };
+      end
+   elseif (attributeType == "quests") then
+      for k, v in pairs (attributeValues) do
+         splitSources.pos = { };
+         splitSources.neg = { };
+         splitSources.unk = { };
+      end
+   end
+
+   for k, source in ipairs (sources) do
+      if (attributeType == "quests") then
+         local hasQuest = LootGain_SourceHasQuest(source, attributeName);
+         if (hasQuest == true) then
+            splitSources.pos[#splitSources.pos + 1] = source;
+         elseif (hasQuest == false) then
+            splitSources.neg[#splitSources.neg + 1] = source;
+         --else
+         --   splitSources.unk[#splitSources.neg + 1] = source;
+         end
+      else
+         local datum = LootGain_GetSourceDatum(source, attributeType);
+         if (datum ~= nil) then
+            splitSources[datum][#splitSources[datum] + 1] = source;
+         end
+      end
+   end
+
+   return splitSources;
+end
+
 function LootGain_Test()
    local attributes, counts = LootGain_GetAttributes();
 
+   --local splitSources = LootGain_SplitSourcesOnAttribute(LootGain_Data.sources,
+   --                                                      "lootTypes", nil, attributes.lootTypes);
+
+   local splitSources = LootGain_SplitSourcesOnAttribute(LootGain_Data.sources,
+                                                         "quests", 31472, attributes.lootTypes);
+
+
+   for k, v in pairs (splitSources) do
+      LootGainPrint(k .. ": " .. #v);
+   end
+
+   --[[
    local i = 0;
    for k in pairs (attributes.items) do
       if (i > 10) then break end;
@@ -256,6 +363,7 @@ function LootGain_Test()
 
       i = i + 1;
    end
+   --]]
 end
 
 
