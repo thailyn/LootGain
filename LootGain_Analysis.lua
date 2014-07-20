@@ -207,13 +207,7 @@ local function LootGain_NumSlotsOfItem(source, itemId)
    return numSlots;
 end
 
--- Given a list of sources and an item id, calculate
--- the entropy for that item.
-local function LootGain_Entropy(sources, numSources, itemId)
-   local splits = { };
-   splits.pos = true;
-   splits.neg = true;
-
+local function LootGain_DivideSourcesOnHavingItem(sources, itemId)
    local splitSources = { pos = { }, neg = { } };
 
    for k, source in ipairs (sources) do
@@ -226,6 +220,18 @@ local function LootGain_Entropy(sources, numSources, itemId)
          end
       end
    end
+
+   return splitSources;
+end
+
+-- Given a list of sources and an item id, calculate
+-- the entropy for that item.
+local function LootGain_Entropy(sources, numSources, itemId)
+   local splits = { };
+   splits.pos = true;
+   splits.neg = true;
+
+   local splitSources = LootGain_DivideSourcesOnHavingItem(sources, itemId);
 
    local sum = 0;
    for k in pairs(splits) do
