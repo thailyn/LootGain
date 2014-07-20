@@ -232,8 +232,10 @@ local function LootGain_Entropy(sources, numSources, itemId)
 
    local sum = 0;
    for k in pairs(splits) do
-      local prob = #splitSources[k] / numSources;
-      sum = sum + prob * LootGain_log2(prob);
+      if (#splitSources[k] > 0 and numSources > 0) then
+         local prob = #splitSources[k] / numSources;
+         sum = sum + prob * LootGain_log2(prob);
+      end
    end
    local entropy = -1 * sum;
 
